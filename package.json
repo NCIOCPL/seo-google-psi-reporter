@@ -1,0 +1,31 @@
+{
+  "name": "cgv-pagespeed-insights",
+  "version": "0.0.0",
+  "description": "Tool to get Google PageSpeed Insights for CGOV",
+  "private": true,
+  "bin": {
+    "cgv-pagespeed-insights": "./bin/cgv-pagespeed-insights"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "author": {
+    "name": "Bryan Pizzillo",
+    "email": "bryanp@mail.nih.gov",
+    "url": "https://github.com/bryanpizzillo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bryanpizzillo/cgv-pagespeed-insights"
+  },
+  "license": "MIT",
+  "bugs": "https://github.com/bryanpizzillo/cgv-pagespeed-insights/issues",
+  "dependencies": {
+    "async": "^2.1.5",
+    "autocmdr": "~0.0.7",
+    "commander": "~2.0.0",
+    "lodash": "^4.17.4",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {}
+}
