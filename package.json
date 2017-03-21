@@ -25,7 +25,9 @@
     "autocmdr": "~0.0.7",
     "commander": "~2.0.0",
     "lodash": "^4.17.4",
-    "request": "^2.81.0"
+    "psi": "^3.0.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0"
   },
   "devDependencies": {}
 }

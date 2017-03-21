@@ -13,6 +13,7 @@ require('autocmdr/lib/help')(program);
 
 
 program
+	.option('-s --server <server>', 'Server')
 	.parse(process.argv);
 
 if (program.args.length < 1 ) {
