@@ -5,7 +5,6 @@ const colors    = require('colors');
 const moment    = require('moment');
 const path      = require('path');
 
-const CGVContentListingSvc = require('../lib/CGV-content-listing-svc'); 
 const InsightsProcessor = require('../lib/insights-processor'); 
 
 
@@ -31,8 +30,6 @@ function GetPageSpeedInsights(program) {
         program.help();
       }
 
-      let svc = new CGVContentListingSvc(cmd.parent.server);
-
       let timestamp = moment().format('YYYYMMDD_hhmmss');
       
       //The folder will be created by the processor
@@ -40,7 +37,7 @@ function GetPageSpeedInsights(program) {
 
       console.log(`Using ${folder} for output`);
 
-      let processor = new InsightsProcessor(svc, {
+      let processor = new InsightsProcessor(cmd.parent.server, {
         outputFolder: folder,
         insightsApiKey: cmd.parent.key
       });
