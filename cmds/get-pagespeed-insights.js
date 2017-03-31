@@ -4,13 +4,14 @@
 const colors    = require('colors');
 const moment    = require('moment');
 const path      = require('path');
+const Logger    = require('../lib/logger');
 
 const InsightsProcessor = require('../lib/insights-processor'); 
 
 
 module.exports = GetPageSpeedInsights;
 
-
+let logger = new Logger({ name: "get-ps-insights" });
 
 function GetPageSpeedInsights(program) {
   program
@@ -26,7 +27,7 @@ function GetPageSpeedInsights(program) {
         (!cmd.parent.server || cmd.parent.server == "" ) ||
         (!outputFolder || outputFolder == "")
       ) {
-        console.error(colors.red('Invalid server or folder'));
+        logger.error('Invalid server or folder');
         program.help();
       }
 
@@ -35,7 +36,7 @@ function GetPageSpeedInsights(program) {
       //The folder will be created by the processor
       let folder = path.join(process.cwd(), outputFolder, timestamp);
 
-      console.log(`Using ${folder} for output`);
+      logger.info(`Using ${folder} for output`);
 
       let processor = new InsightsProcessor(cmd.parent.server, {
         outputFolder: folder,
@@ -47,13 +48,13 @@ function GetPageSpeedInsights(program) {
       processor.process()
         .then(() => {
           //Exit
-          console.log("Finished.  Exiting...")
+          logger.info("Finished.  Exiting...")
           process.exit(0);
         })
         .catch((err) => {
           //Exit
-          console.error(colors.red(err));
-          console.error(colors.red("Errors occurred.  Exiting"));
+          logger.error(err);
+          logger.error("Errors occurred.  Exiting");
           process.exit(1);
         }); 
     });

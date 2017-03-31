@@ -25,6 +25,7 @@
     "autocmdr": "~0.0.7",
     "bluebird": "^3.5.0",
     "bluebird-retry": "^0.10.1",
+    "bunyan": "^1.8.9",
     "commander": "~2.0.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
