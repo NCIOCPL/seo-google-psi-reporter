@@ -15,7 +15,9 @@ function ExportReport(program) {
     .command('export-report <inputFolder> <outputFile>')
     .version('0.0.1')
     .description(' \
-        Tests CancerGov CDE Published Content Listing functionality. \
+        \n  Exports an Excel report of the PSI output from a "get-pagespeed-insights" run. \
+        \n    <inputFolder> is the output folder from the "get-pagespeed-insights" run. \
+        \n    <outputFile> is the name of the Excel sheet with the report\n\n \
     ')
     .action((inputFolder, outputFile, cmd) => {
       

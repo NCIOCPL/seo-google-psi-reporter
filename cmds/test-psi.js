@@ -11,7 +11,7 @@ function TestPSI(program) {
     .command('test-psi <url>')
     .version('0.0.1')
     .description(' \
-        Tests CancerGov CDE Published Content Listing functionality. \
+        Tests PSI functionality for a single URL. \
     ')
     .action((url, cmd) => {
 

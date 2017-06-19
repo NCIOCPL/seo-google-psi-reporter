@@ -5,8 +5,8 @@ var assert = require('assert');
 var exec = require('child_process').exec;
 var path = require('path');
 
-describe('cgv-pagespeed-insights bin', function () {
-  var cmd = 'node ' + path.join(__dirname, '../bin/cgv-pagespeed-insights') + ' ';
+describe('seo-google-psi-reporter bin', function () {
+  var cmd = 'node ' + path.join(__dirname, '../bin/seo-google-psi-reporter') + ' ';
   console.log(cmd);
 
   it('--help should run without errors', function (done) {

@@ -1,0 +1,5 @@
+{
+    "psi_batch_size": 47,
+    "psi_batch_sleep": 90000,
+    "psi_max_async": 20
+}
