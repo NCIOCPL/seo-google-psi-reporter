@@ -3,3 +3,4 @@ npm-debug.log
 /output/
 /logs/
 .DS_Store
+config/local.json
