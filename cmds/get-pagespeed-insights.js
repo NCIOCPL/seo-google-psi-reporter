@@ -126,7 +126,8 @@ function GetPageSpeedInsights(program) {
           process.exit(0);
         })
         //Otherwise, catch any fatal error and exit.
-        .catch((err) => {                    
+        .catch((err) => {  
+          logger.error(`Fatal Error Occurred in get-pagespeed-insights.`)                  
           logger.error(err);
           logger.error("Errors occurred.  Exiting");
           process.exit(2);
