@@ -2,7 +2,6 @@
 
 
 const colors    = require('colors');
-const moment    = require('moment');
 const path      = require('path');
 const Logger    = require('../lib/logger');
 const config    = require('config');
@@ -127,20 +126,11 @@ function GetPageSpeedInsights(program) {
         })
         //Otherwise, catch any fatal error and exit.
         .catch((err) => {  
-          logger.error(`Fatal Error Occurred in get-pagespeed-insights.`)                  
+          logger.error(`Fatal Error Occurred in get-pagespeed-insights.`)                
           logger.error(err);
           logger.error("Errors occurred.  Exiting");
           process.exit(2);
         });
-
-      /*
-      let timestamp = moment().format('YYYYMMDD_hhmmss');
-      
-      //The folder will be created by the processor
-      let folder = path.join(process.cwd(), outputFolder, timestamp);
-
-      logger.info(`Using ${folder} for output`);
-      */
 
     });
 }
