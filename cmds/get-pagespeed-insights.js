@@ -7,11 +7,16 @@ const path      = require('path');
 const Logger    = require('../lib/logger');
 const config    = require('config');
 
-const InsightsProcessor = require('../lib/insights-processor'); 
+const InsightsProcessor = require('../lib/insights-processor');
+const SitemapUrlExtractor = require('../lib/sitemap-url-extractor');
 
 module.exports = GetPageSpeedInsights;
 
-let logger = new Logger({ name: "get-ps-insights" });
+let logger = new Logger({ 
+  name: "get-ps-insights", 
+  stream: process.stdout,
+  level: "debug" }
+);
 
 function GetPageSpeedInsights(program) {
   program
@@ -39,7 +44,9 @@ function GetPageSpeedInsights(program) {
       if (
         !config.has("psi_batch_size") ||
         !config.has("psi_batch_sleep") ||
-        !config.has("psi_max_async") 
+        !config.has("psi_max_async") ||
+        !config.has("psi_max_retries") ||
+        !config.has("psi_waittime_between_errors")
       ) {
         logger.error(`Invalid Config File.  Must contain psi_batch_size, psi_batch_sleep and psi_max_async!`);
         process.exit(1);
@@ -87,18 +94,29 @@ function GetPageSpeedInsights(program) {
       storageProviderModule.GetProviderInstance(logger, storageProviderConfig)
         // Then create a processor and get a promise for the processing of the instance
         .then((storageProviderInstance) => {
-          let processor = new InsightsProcessor(
+
+          let sitemapExtractor = new SitemapUrlExtractor(
             logger, 
             config.get("server"),
+            {}
+          );
+
+          let processor = new InsightsProcessor(
+            logger,            
             storageProviderInstance,
             {
               insightsApiKey: config.get("gapi_key"),
               psi_batch_size: config.get("psi_batch_size"),
               psi_batch_sleep: config.get("psi_batch_sleep"),
-              psi_max_async: config.get("psi_max_async")
+              psi_max_async: config.get("psi_max_async"),
+              psi_max_retries: config.get("psi_max_retries"),
+              psi_waittime_between_errors: config.get("psi_waittime_between_errors")
             }
           );
-          return processor.process(); //This returns a promise, so we can add it to our chain
+
+          //Cal the sitemap extractor THEN the processor's process method (which takes in a list of URLs)
+          return sitemapExtractor.extractPages()
+              .then(processor.process.bind(processor))            
         })
         // Then when processing is done, exit.
         .then(() => {          
