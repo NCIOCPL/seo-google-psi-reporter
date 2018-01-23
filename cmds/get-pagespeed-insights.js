@@ -115,8 +115,9 @@ function GetPageSpeedInsights(program) {
           );
 
           //Cal the sitemap extractor THEN the processor's process method (which takes in a list of URLs)
-          return sitemapExtractor.extractPages()
-              .then(processor.process.bind(processor))            
+          //return sitemapExtractor.extractPages()
+          //    .then(processor.process.bind(processor))            
+          return processor.process(['https://www.cancer.gov/about-cancer']);
         })
         // Then when processing is done, exit.
         .then(() => {          
