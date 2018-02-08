@@ -61,10 +61,10 @@ async function loadStorageProvider() {
   let storageProviderModule = null;
 
   //Load the provider Module
-  try {
+  try { 
     storageProviderModule = require(storageProviderModulePath);
   } catch(err) {
-    logger.error(`Could not load storage provider, ${storageProviderName}. ${err.message}`);
+    logger.error(`Could not load storage provider module, ${storageProviderName}.`);
     logger.error(err);
     throw new Error("Could not load storage provider");
   }
@@ -79,7 +79,15 @@ async function loadStorageProvider() {
     throw new Error("Invalid Configuration")
   }
 
-  let storageProvider = await storageProviderModule.GetProviderInstance(logger, storageProviderConfig);
+  let storageProvider = null;
+  
+  try {
+    storageProvider = await storageProviderModule.GetProviderInstance(logger, storageProviderConfig);
+  } catch (err) {
+    logger.error(`Could not create instance of provider module, ${storageProviderName}.`);
+    logger.error(err);
+    throw new Error("Could not create instance of storage provider");
+  }
 
   return storageProvider;
 }
