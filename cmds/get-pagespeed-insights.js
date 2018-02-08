@@ -151,6 +151,9 @@ function GetPageSpeedInsights(program) {
     ')
     .action((cmd) => {
 
-      action();
+      action()
+        .then(() => {
+          
+        })
     });
 }
