@@ -130,22 +130,30 @@ async function action() {
     }
   );
 
-  try {
-    //Cal the sitemap extractor THEN the processor's process method (which takes in a list of URLs)
-    //return sitemapExtractor.extractPages()
-    //    .then(processor.process.bind(processor))            
+  let sitemapUrls = [];
 
-    await processor.process(['https://www.cancer.gov/about-cancer']);
+  try {
+    sitemapUrls = await sitemapExtractor.extractPages();
+  } catch (err) {
+    logger.error(`Fatal Error Occurred in Retreiving Sitemap Urls.`)
+    logger.error(err);
+    logger.error("Errors occurred.  Exiting");
+    process.exit(4);
+  }
+
+  try {
+    //Call the sitemap extractor THEN the processor's process method (which takes in a list of URLs)
+    await processor.process(sitemapUrls);
 
     //Exit
     logger.info("Finished.  Exiting...")
     process.exit(0);
     
   } catch (err) {
-    logger.error(`Fatal Error Occurred in get-pagespeed-insights.`)                
+    logger.error(`Fatal Error Occurred in Processing Sitemap URLs.`)                
     logger.error(err);
     logger.error("Errors occurred.  Exiting");
-    process.exit(3);
+    process.exit(4);
   }
 }
 
