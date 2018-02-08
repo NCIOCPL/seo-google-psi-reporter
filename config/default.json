@@ -6,14 +6,14 @@
     "psi_waittime_between_errors": 60000,
     "server": "https://www.cancer.gov",
     "gapi_key": "bad_key",
-    "storage_provider": "test-storage-provider",
-    "storage_provider_config": {}
-    /*
+    //"storage_provider": "test-storage-provider",
+    //"storage_provider_config": {}
+    
     "storage_provider": "file-storage-provider",
     "storage_provider_config": {
         "output_dir": "./output"    
     } 
-    */   
+       
     /*
         Alternatively you can have the following for DB connections
         "storage_provider": "db-storage-provider",
