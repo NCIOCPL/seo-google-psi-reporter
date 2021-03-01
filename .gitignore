@@ -1,6 +1,7 @@
 /node_modules/
 npm-debug.log
 /output/
+/data/
 /logs/
 .DS_Store
 config/local.json

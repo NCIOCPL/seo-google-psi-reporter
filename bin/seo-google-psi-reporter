@@ -1,22 +1,21 @@
 #!/usr/bin/env node
 'use strict';
 
-var program  = require('commander');
+const { Command } = require('commander');
+const { FetchInsights } = require('../cmds');
 
-require('autocmdr/lib/logger')(program);
-require('autocmdr/lib/loader')(program);
-//require('autocmdr/lib/completion')(program);
-require('autocmdr/lib/package')(program);
-//require('autocmdr/lib/config')(program);
-require('autocmdr/lib/help')(program);
+const main = async () => {
+	const program = new Command();
+	program.version('2.0.0');
+	program.addCommand(FetchInsights());
 
+	await program.parseAsync(process.argv);
 
-
-program	
-	.parse(process.argv);
-
-if (program.args.length < 1 ) {
-	console.log('No command specified. See \'seo-google-psi-reporter --help\':');
-	program.outputHelp();
-	process.exit(1);
+	if (program.args.length < 1 ) {
+		console.log('No command specified. See \'seo-google-psi-reporter --help\':');
+		program.outputHelp();
+		process.exit(1);
+	}
 }
+
+main();
